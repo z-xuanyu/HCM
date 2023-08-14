@@ -2,27 +2,27 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 15:07:53
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-14 16:17:18
+ * @LastEditTime: 2023-08-14 18:10:13
  * @FilePath: \HCM\electron\update.ts
  * @Description: 更新版本
  */
 import { autoUpdater } from "electron-updater";
-import { dialog, app } from "electron";
+import { BrowserWindow, dialog } from "electron";
 import log from "electron-log";
-import path from "path";
-import fs from "fs";
+// import path from "path";
+// import fs from "fs";
 
-export function checkForUpdate() {
+export function checkForUpdate(win: BrowserWindow | null) {
 
   // 开发环境调试
-  Object.defineProperty(app, "isPackaged", {
-    get() {
-      return true;
-    },
-  });
+  // Object.defineProperty(app, "isPackaged", {
+  //   get() {
+  //     return true;
+  //   },
+  // });
 
   // 生成更新文件
-  createUpdateFile();
+  // createUpdateFile();
 
   const server = "http://192.168.0.123:3000";
   const url = `${server}/public/update/win`;
@@ -60,6 +60,7 @@ export function checkForUpdate() {
   // 下载进度条
   autoUpdater.on("download-progress", (progressObj) => {
     log.info(progressObj, "下载进度");
+    win?.setProgressBar(progressObj.percent / 100);
   });
 
   // 更新下载
@@ -68,7 +69,7 @@ export function checkForUpdate() {
     console.log(res);
     const dialogOpts: any = {
       type: "info",
-      buttons: ["Restart", "Later"],
+      buttons: ["重新启动", "取消"],
       title: "Application Update",
       message: "下载完成",
       detail:
@@ -87,25 +88,25 @@ export function checkForUpdate() {
 }
 
 // 创建更新 app-update.yml文件 函数
-function createUpdateFile() {
-  let yaml = "";
+// function createUpdateFile() {
+//   let yaml = "";
 
-  yaml += "provider: generic\n";
-  yaml += "url: http://192.168.0.123:3000/public/update/win\n";
-  yaml += "useMultipleRangeRequest: false\n";
-  yaml += "channel: latest\n";
-  yaml += "updaterCacheDirName: " + app.getName();
+//   yaml += "provider: generic\n";
+//   yaml += "url: http://192.168.0.123:3000/public/update/win\n";
+//   yaml += "useMultipleRangeRequest: false\n";
+//   yaml += "channel: latest\n";
+//   yaml += "updaterCacheDirName: " + app.getName();
 
-  let update_file = [path.join(process.resourcesPath, "app-update.yml"), yaml];
-  let dev_update_file = [
-    path.join(process.resourcesPath, "dev-app-update.yml"),
-    yaml,
-  ];
-  let chechFiles = [update_file, dev_update_file];
+//   let update_file = [path.join(process.resourcesPath, "app-update.yml"), yaml];
+//   let dev_update_file = [
+//     path.join(process.resourcesPath, "dev-app-update.yml"),
+//     yaml,
+//   ];
+//   let chechFiles = [update_file, dev_update_file];
 
-  for (let file of chechFiles) {
-    if (!fs.existsSync(file[0])) {
-      fs.writeFileSync(file[0], file[1]);
-    }
-  }
-}
+//   for (let file of chechFiles) {
+//     if (!fs.existsSync(file[0])) {
+//       fs.writeFileSync(file[0], file[1]);
+//     }
+//   }
+// }

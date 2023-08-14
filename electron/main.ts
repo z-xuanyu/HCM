@@ -2,11 +2,11 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-13 15:21:22
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-14 16:42:21
+ * @LastEditTime: 2023-08-14 18:19:34
  * @FilePath: \HCM\electron\main.ts
  * @Description: 主入口文件
  */
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 import path from "node:path";
 import { checkForUpdate } from "./update";
 
@@ -37,6 +37,8 @@ function createWindow() {
     },
   });
 
+  Menu.setApplicationMenu(null)
+
   // Test active push message to Renderer-process.
   win.webContents.on("did-finish-load", () => {
     win?.webContents.send("main-process-message", new Date().toLocaleString());
@@ -57,5 +59,5 @@ app.on("window-all-closed", () => {
 app.whenReady().then(createWindow);
 
 app.on("ready", () => {
-  checkForUpdate();
+  checkForUpdate(win);
 });

@@ -1,3 +1,18 @@
+/*
+ * @Author: xuanyu 969718197@qq.com
+ * @Date: 2023-08-13 15:21:22
+ * @LastEditors: xuanyu 969718197@qq.com
+ * @LastEditTime: 2023-08-16 17:12:47
+ * @FilePath: \HCM\electron\preload.ts
+ * @Description: 渲染进程
+ */
+
+import { contextBridge, ipcRenderer } from 'electron'
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  setTitle: (title: string) => ipcRenderer.send('set-title', title)
+})
+
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
   return new Promise(resolve => {
     if (condition.includes(document.readyState)) {

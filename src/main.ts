@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-13 15:21:22
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-17 17:13:34
+ * @LastEditTime: 2023-08-17 17:39:56
  * @FilePath: \HCM\src\main.ts
  * @Description: 入口文件
  */
@@ -10,11 +10,16 @@ import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
 import { setupRouter } from "./router";
-import { setupStore } from './store';
+import { setupStore } from "./store";
 import { setupI18n } from "./locales/i18n";
+
+const meta = document.createElement("meta");
+meta.name = "naive-ui-style";
+document.head.appendChild(meta);
 
 function bootstrap() {
   const app = createApp(App);
+
   // 国际化
   setupI18n(app);
   // 注册路由

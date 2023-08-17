@@ -8,3 +8,5 @@ export interface IElectronAPI {
       electronAPI: IElectronAPI;
     }
   }
+
+  declare module 'vue-i18n';

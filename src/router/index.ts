@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 16:56:15
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-14 17:11:09
+ * @LastEditTime: 2023-08-17 13:53:12
  * @FilePath: \HCM\src\router\index.ts
  * @Description: 路由配置
  */

@@ -8,6 +8,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    'IconIc:baselineAttachEmail': typeof import('~icons/ic/baseline-attach-email')['default']
+    IconSvgAvatar: typeof import('~icons/svg/avatar')['default']
+    IconSvgEmptyData: typeof import('~icons/svg/empty-data')['default']
     NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDropdown: typeof import('naive-ui')['NDropdown']

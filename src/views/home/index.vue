@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 17:10:09
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-17 18:22:12
+ * @LastEditTime: 2023-08-18 14:11:43
  * @FilePath: \HCM\src\views\home\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -44,6 +44,8 @@ const LanguageZh = (lang: I18nType.langType) => {
     <n-button type="warning" @click="theme.setDarkMode(false)"> 浅色 </n-button>
   </n-space>
   <p class="bg-indigo-700 text-white mt-10 text-xl dark:bg-white dark:text-black">{{ t("message.system.title") }}</p>
+  <icon-svg-avatar class="text-[200px]"></icon-svg-avatar>
+  <icon-svg-empty-data class="text-[200px]"></icon-svg-empty-data>
 </template>
 
 <style scoped lang="scss"></style>

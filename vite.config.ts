@@ -2,17 +2,21 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-13 15:21:22
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-14 17:14:35
+ * @LastEditTime: 2023-08-18 13:51:47
  * @FilePath: \HCM\vite.config.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @Description: vite 配置文件
  */
 import { defineConfig } from "vite";
 import electron from "vite-plugin-electron";
 import renderer from "vite-plugin-electron-renderer";
 import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import Icons from "unplugin-icons/vite";
+import { FileSystemIconLoader } from "unplugin-icons/loaders";
+import IconsResolver from "unplugin-icons/resolver";
 import { resolve } from "path";
 
 function pathResolve(dir: string) {
@@ -31,7 +35,14 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    vueJsx(),
     AutoImport({
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/, // .vue
+        /\.md$/, // .md
+      ],
       imports: [
         "vue",
         {
@@ -42,10 +53,28 @@ export default defineConfig({
             "useLoadingBar",
           ],
         },
+        "vue-router",
+        "pinia",
       ],
     }),
     Components({
-      resolvers: [NaiveUiResolver()],
+      resolvers: [
+        NaiveUiResolver(),
+        IconsResolver({
+          prefix: "icon",
+          customCollections: ["svg"],
+        }),
+      ],
+    }),
+    Icons({
+      autoInstall: true,
+      compiler: "vue3",
+      // 自定义图标 svg
+      customCollections: {
+        svg: FileSystemIconLoader("src/assets/svgs", (svg) =>
+          svg.replace(/^<svg /, '<svg fill="currentColor" ')
+        ),
+      },
     }),
     electron([
       {

@@ -7,13 +7,21 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    DarkModeSwitch: typeof import('./src/components/common/DarkModeSwitch.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     'IconIc:baselineAttachEmail': typeof import('~icons/ic/baseline-attach-email')['default']
+    IconMdiMoonWaningCrescent: typeof import('~icons/mdi/moon-waning-crescent')['default']
+    IconMdiWhiteBalanceSunny: typeof import('~icons/mdi/white-balance-sunny')['default']
     IconSvgAvatar: typeof import('~icons/svg/avatar')['default']
     IconSvgEmptyData: typeof import('~icons/svg/empty-data')['default']
     NButton: typeof import('naive-ui')['NButton']
+    NCard: typeof import('naive-ui')['NCard']
+    NCheckbox: typeof import('naive-ui')['NCheckbox']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDropdown: typeof import('naive-ui')['NDropdown']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NInput: typeof import('naive-ui')['NInput']
     NSpace: typeof import('naive-ui')['NSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

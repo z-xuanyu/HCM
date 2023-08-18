@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 16:56:15
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-17 13:53:12
+ * @LastEditTime: 2023-08-18 14:20:40
  * @FilePath: \HCM\src\router\index.ts
  * @Description: 路由配置
  */
@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/home/index.vue"),
+    component: () => import("../views/login/index.vue"),
   },
 ];
 

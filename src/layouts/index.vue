@@ -1,21 +1,22 @@
 <!--
  * @Author: xuanyu 969718197@qq.com
- * @Date: 2023-08-17 13:49:37
+ * @Date: 2023-08-14 17:10:09
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-17 13:52:01
- * @FilePath: \HCM\src\layouts\index.vue
- * @Description: 整体布局
+ * @LastEditTime: 2023-08-18 17:29:47
+ * @FilePath: \HCM\src\views\home\index.vue
+ * @Description: 首页
 -->
 <script setup lang="ts">
-import { zhCN, dateZhCN } from 'naive-ui';
+import GlobalHeader from './components/global-header/index.vue';
 </script>
 
 <template>
   <div class="layout-page">
-    <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
-      <router-view></router-view>
-    </n-config-provider>
+    <GlobalHeader />
+    <router-view></router-view>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

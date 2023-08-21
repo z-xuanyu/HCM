@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-17 17:06:18
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 14:02:22
+ * @LastEditTime: 2023-08-21 16:23:32
  * @FilePath: \HCM\src\locales\lang\en.ts
  * @Description: 英文语言包
  */
@@ -20,6 +20,8 @@ const locale: LocaleMessages<any> = {
       talentPool: "Talent Pool",
       // 日程
       schedule: "Schedule",
+      // 浏览器
+      browser: "Browser",
     },
     // 用户中心
     userCenter: "User Center",
@@ -57,6 +59,11 @@ const locale: LocaleMessages<any> = {
       resetPassword: "Reset Password",
       // 微信绑定
       bindWechat: "Bind Wechat",
+    },
+    // 异常
+    exception: {
+      // 回到首页
+      backToHome: "Back to home",
     }
   },
 };

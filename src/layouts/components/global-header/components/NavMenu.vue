@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-21 10:45:14
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 11:41:42
+ * @LastEditTime: 2023-08-21 16:23:00
  * @FilePath: \HCM\src\layouts\components\global-header\components\NavMenu.vue
  * @Description: 导航
 -->
@@ -22,6 +22,11 @@ const menuOptions = ref<MenuOption[]>([]);
 
 watchEffect(() => {
   menuOptions.value = [
+    {
+      label: t("message.menu.browser"),
+      key: "browser",
+      icon: iconRender({ icon: "icon-park-outline:browser-chrome" }),
+    },
     {
       label: t("message.menu.talentPool"),
       key: "talent-pool",

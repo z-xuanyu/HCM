@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 16:56:15
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 11:32:27
+ * @LastEditTime: 2023-08-21 16:42:44
  * @FilePath: \HCM\src\router\index.ts
  * @Description: 路由配置
  */
@@ -18,6 +18,14 @@ const routes: Array<RouteRecordRaw> = [
       title: "首页",
     },
     children: [
+      {
+        path: "/browser",
+        name: "Browser",
+        component: () => import("/@/views/browser/index.vue"),
+        meta: {
+          title: "浏览器",
+        },
+      },
       {
         path: "/talent-pool",
         name: "TalentPool",

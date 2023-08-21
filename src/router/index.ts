@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 16:56:15
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-18 16:12:50
+ * @LastEditTime: 2023-08-21 11:32:27
  * @FilePath: \HCM\src\router\index.ts
  * @Description: 路由配置
  */
@@ -17,6 +17,32 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: "首页",
     },
+    children: [
+      {
+        path: "/talent-pool",
+        name: "TalentPool",
+        component: () => import("/@/views/talent-pool/index.vue"),
+        meta: {
+          title: "人才库",
+        },
+      },
+      {
+        path: "/team",
+        name: "Team",
+        component: () => import("/@/views/team/index.vue"),
+        meta: {
+          title: "团队",
+        },
+      },
+      {
+        path: "/schedule",
+        name: "Schedule",
+        component: () => import("/@/views/schedule/index.vue"),
+        meta: {
+          title: "日程",
+        },
+      },
+    ],
   },
   {
     path: "/",

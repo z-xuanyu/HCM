@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-21 10:45:14
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 11:14:40
+ * @LastEditTime: 2023-08-21 11:41:42
  * @FilePath: \HCM\src\layouts\components\global-header\components\NavMenu.vue
  * @Description: 导航
 -->
@@ -11,10 +11,12 @@ import { MenuOption } from "naive-ui";
 import { useIconRender } from "/@/composables";
 import { ref, watchEffect } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRouter } from 'vue-router';
 
 const { iconRender } = useIconRender();
 const { t } = useI18n();
-const activeKey = ref("user-center");
+const router = useRouter();
+const activeKey = ref("");
 
 const menuOptions = ref<MenuOption[]>([]);
 
@@ -37,6 +39,12 @@ watchEffect(() => {
     },
   ];
 });
+
+
+const handleUpdateValue = (key: string) => {
+  activeKey.value = key;
+  router.push({ path: `/${key}` });
+};
 </script>
 
 <template>
@@ -45,6 +53,7 @@ watchEffect(() => {
       v-model:value="activeKey"
       mode="horizontal"
       :options="menuOptions"
+      @update:value="handleUpdateValue"
     />
   </div>
 </template>

@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-18 14:42:14
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-18 16:24:51
+ * @LastEditTime: 2023-08-21 13:53:43
  * @FilePath: \HCM\src\views\login\components\pwd-login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,9 +10,11 @@
 import { FormInst, FormRules } from "naive-ui";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const formRef = ref<HTMLElement & FormInst>();
 const router = useRouter();
+const { t } = useI18n();
 
 const model = reactive({
   userName: "xuanyu",
@@ -52,20 +54,27 @@ async function handleSubmit() {
     :show-label="false"
   >
     <n-form-item path="userName">
-      <n-input v-model:value="model.userName" placeholder="请输入用户名" />
+      <n-input
+        v-model:value="model.userName"
+        :placeholder="t('message.loginForm.usernamePlaceholder')"
+      />
     </n-form-item>
     <n-form-item path="password">
       <n-input
         v-model:value="model.password"
         type="password"
         show-password-on="click"
-        placeholder="请输入密码"
+        :placeholder="t('message.loginForm.passwordPlaceholder')"
       />
     </n-form-item>
     <n-space :vertical="true" :size="24">
       <div class="flex justify-between items-center">
-        <n-checkbox v-model:checked="rememberMe">记住我</n-checkbox>
-        <n-button :text="true">忘记密码？</n-button>
+        <n-checkbox v-model:checked="rememberMe">{{
+          t("message.loginForm.rememberMe")
+        }}</n-checkbox>
+        <n-button :text="true">{{
+          t("message.loginForm.forgetPassword")
+        }}</n-button>
       </div>
       <n-button
         type="primary"
@@ -75,7 +84,7 @@ async function handleSubmit() {
         :loading="loading"
         @click="handleSubmit"
       >
-        立即登录
+        {{ t("message.loginForm.loginNow")  }}
       </n-button>
     </n-space>
   </n-form>

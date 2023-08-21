@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-18 11:46:43
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-18 15:29:31
+ * @LastEditTime: 2023-08-21 14:00:43
  * @FilePath: \HCM\src\views\login\index.vue
  * @Description: 登录界面
 -->
@@ -12,8 +12,10 @@ import { useThemeStore } from '/@/store';
 import { loginModuleLabels } from '/@/constants';
 import { BindWechat, LoginBg, CodeLogin, PwdLogin, Register, ResetPwd } from './components';
 import { getColorPalette, mixColor } from '/@/utils';
+import { useI18n } from 'vue-i18n';
 
 const theme = useThemeStore();
+const { t } = useI18n();
 
 interface Props {
   /** 登录模块分类 */
@@ -68,7 +70,7 @@ const bgColor = computed(() => {
     <n-card :bordered="false" size="large" class="z-4 !w-[420px] mx-auto !rounded-lg absolute z-10 top-1/2 -translate-y-1/2 !shadow-sm">
       <div class="w-full">
         <main class="pt-[24px]">
-          <h3 class="text-[18px] text-primary font-medium">{{ activeModule.label }}</h3>
+          <h3 class="text-[18px] text-primary font-medium">{{ t(activeModule.label) }}</h3>
           <div class="pt-[24px]">
             <transition name="fade-slide" mode="out-in" appear>
               <component :is="activeModule.component" />

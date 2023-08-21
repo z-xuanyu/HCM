@@ -30,7 +30,7 @@ defineOptions({ name: "ToggleTheme" });
     title="主题皮肤切换"
     @close="handleClose"
   >
-    <n-grid :cols="8" :x-gap="8" :y-gap="12">
+    <n-grid :cols="12" :x-gap="8" :y-gap="12">
       <n-grid-item
         v-for="color in theme.themeColorList"
         :key="color"

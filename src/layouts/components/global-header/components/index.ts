@@ -10,6 +10,14 @@ import ThemeMode from "./ThemeMode.vue";
 import ToggleLang from "./ToggleLang.vue";
 import UserAvatar from "./UserAvatar.vue";
 import ToggleTheme from "./ToggleTheme.vue";
-import ColorCheckbox from './ColorCheckbox.vue';
+import ColorCheckbox from "./ColorCheckbox.vue";
+import NavMenu from "./NavMenu.vue";
 
-export { ThemeMode, ToggleLang, UserAvatar, ToggleTheme, ColorCheckbox };
+export {
+  ThemeMode,
+  ToggleLang,
+  UserAvatar,
+  ToggleTheme,
+  ColorCheckbox,
+  NavMenu,
+};

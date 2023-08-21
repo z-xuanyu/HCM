@@ -2,26 +2,33 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-18 11:42:48
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 09:26:35
+ * @LastEditTime: 2023-08-21 11:08:26
  * @FilePath: \HCM\src\layouts\components\global-header\index.vue
  * @Description: 头部组件
 -->
 <script setup lang="ts">
 import { useThemeStore } from "/@/store";
-import { ThemeMode, ToggleLang, UserAvatar, ToggleTheme } from "./components";
-
+import {
+  ThemeMode,
+  ToggleLang,
+  UserAvatar,
+  ToggleTheme,
+  NavMenu,
+} from "./components";
+import { useI18n } from "vue-i18n";
 defineOptions({ name: "GlobalHeader" });
 
 const theme = useThemeStore();
+const { t } = useI18n();
 </script>
 
 <template>
   <dark-mode-container
     class="global-header flex items-center justify-between h-full px-5 dark:bg-gray-800"
     :inverted="theme.header.inverted"
-  > 
-    <div>log</div>
-    <div class="nav">导航</div>
+  >
+    <div class="font-bold">{{ t("message.system.title") }}</div>
+    <nav-menu />
     <div class="flex items-center">
       <!-- <global-search /> -->
       <theme-mode />

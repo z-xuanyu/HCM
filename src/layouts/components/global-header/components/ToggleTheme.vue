@@ -15,7 +15,7 @@ defineOptions({ name: "ToggleTheme" });
 </script>
 
 <template>
-  <hover-container class="w-[40px] h-full">
+  <hover-container class="w-[40px] h-full" tooltip-content="主题皮肤切换">
     <icon-mdi:color
       class="text-[18px] outline-transparent"
       @click="visible = !visible"

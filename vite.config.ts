@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-13 15:21:22
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-18 13:51:47
+ * @LastEditTime: 2023-08-21 15:41:32
  * @FilePath: \HCM\vite.config.ts
  * @Description: vite 配置文件
  */
@@ -32,6 +32,13 @@ export default defineConfig({
         replacement: pathResolve("src") + "/",
       },
     ],
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "./src/styles/scss/global.scss" as *;`
+      }
+    }
   },
   plugins: [
     vue(),

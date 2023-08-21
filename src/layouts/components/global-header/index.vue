@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-18 11:42:48
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 11:08:26
+ * @LastEditTime: 2023-08-21 17:50:58
  * @FilePath: \HCM\src\layouts\components\global-header\index.vue
  * @Description: 头部组件
 -->
@@ -24,7 +24,7 @@ const { t } = useI18n();
 
 <template>
   <dark-mode-container
-    class="global-header flex items-center justify-between h-full px-5 dark:bg-gray-800"
+    class="global-header flex items-center justify-between py-2 px-5 dark:bg-gray-800"
     :inverted="theme.header.inverted"
   >
     <div class="font-bold">{{ t("message.system.title") }}</div>
@@ -42,7 +42,6 @@ const { t } = useI18n();
 
 <style scoped lang="scss">
 .global-header {
-  height: 56px;
   box-shadow: 0 1px 2px rgb(0 21 41 / 8%);
 }
 </style>

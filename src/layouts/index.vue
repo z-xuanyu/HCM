@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 17:10:09
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 15:57:17
+ * @LastEditTime: 2023-08-21 17:43:27
  * @FilePath: \HCM\src\views\home\index.vue
  * @Description: 首页
 -->
@@ -12,10 +12,14 @@ import GlobalContent from "./components/global-content/index.vue";
 </script>
 
 <template>
-  <div class="layout-page flex flex-col h-screen overflow-hidden">
+  <div class="layout-page flex flex-col h-screen">
     <GlobalHeader />
     <global-content />
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.layout-page{
+  @include scrollbar(8px, #e1e1e1);
+}
+</style>

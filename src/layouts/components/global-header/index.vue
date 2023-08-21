@@ -2,13 +2,13 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-18 11:42:48
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-18 17:33:02
+ * @LastEditTime: 2023-08-21 09:26:35
  * @FilePath: \HCM\src\layouts\components\global-header\index.vue
  * @Description: 头部组件
 -->
 <script setup lang="ts">
 import { useThemeStore } from "/@/store";
-import { ThemeMode, ToggleLang, UserAvatar } from "./components";
+import { ThemeMode, ToggleLang, UserAvatar, ToggleTheme } from "./components";
 
 defineOptions({ name: "GlobalHeader" });
 
@@ -17,7 +17,7 @@ const theme = useThemeStore();
 
 <template>
   <dark-mode-container
-    class="global-header flex items-center justify-between h-full px-5"
+    class="global-header flex items-center justify-between h-full px-5 dark:bg-gray-800"
     :inverted="theme.header.inverted"
   > 
     <div>log</div>
@@ -25,6 +25,7 @@ const theme = useThemeStore();
     <div class="flex items-center">
       <!-- <global-search /> -->
       <theme-mode />
+      <toggle-theme />
       <toggle-lang />
       <!-- <system-message /> -->
       <user-avatar />

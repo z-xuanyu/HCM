@@ -8,14 +8,16 @@
   </template>
   
   <script lang="ts" setup>
-  import type { DropdownOption } from 'naive-ui';
+  import { type DropdownOption } from 'naive-ui';
   import { useThemeStore } from '/@/store';
   import { useIconRender } from '/@/composables';
+  import { useRouter } from 'vue-router';
   
   defineOptions({ name: 'UserAvatar' });
   
   const theme = useThemeStore();
   const { iconRender } = useIconRender();
+  const router = useRouter();
   
   const options: DropdownOption[] = [
     {
@@ -46,6 +48,9 @@
         negativeText: '取消',
         onPositiveClick: () => {
           console.log(5455);
+          router.push({
+            name: 'Login'
+          });
         }
       });
     }

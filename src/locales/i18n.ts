@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-17 17:05:17
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-17 17:14:05
+ * @LastEditTime: 2023-08-18 18:33:30
  * @FilePath: \HCM\src\locales\i18n.ts
  * @Description: 国际化
  */
@@ -24,7 +24,7 @@ export function setupI18n(app: App) {
 }
 
 export function t(key: string) {
-  return i18n!.global.t(key);
+  return (i18n!.global as any).t(key);
 }
 
 export function setLocale(locale: LocaleKey) {

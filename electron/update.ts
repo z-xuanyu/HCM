@@ -2,30 +2,43 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 15:07:53
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-14 18:10:13
+ * @LastEditTime: 2023-08-22 09:45:08
  * @FilePath: \HCM\electron\update.ts
  * @Description: 更新版本
  */
 import { autoUpdater } from "electron-updater";
-import { BrowserWindow, dialog } from "electron";
+import { BrowserWindow, dialog, app } from "electron";
 import log from "electron-log";
-// import path from "path";
-// import fs from "fs";
+import path from "path";
+import fs from "fs";
 
 export function checkForUpdate(win: BrowserWindow | null) {
+  if (process.env.NODE_ENV === "development") {
+    // 开发环境调试
+    Object.defineProperty(app, "isPackaged", {
+      get() {
+        return true;
+      },
+    });
+    // 生成更新文件
+    createUpdateFile();
+  }
+  const server = "https://update.zhouxuanyu.com";
+  let url: string = "";
 
-  // 开发环境调试
-  // Object.defineProperty(app, "isPackaged", {
-  //   get() {
-  //     return true;
-  //   },
-  // });
+  // macos
+  if (process.platform == "darwin") {
+    url = `${server}/public/update/darwin`;
+  }
+  // windows
+  if (process.platform == "win32") {
+    url = `${server}/public/update/win32`;
+  }
+  // linux
+  if (process.platform == "linux") {
+    url = `${server}/public/update/linux`;
+  }
 
-  // 生成更新文件
-  // createUpdateFile();
-
-  const server = "http://192.168.0.123:3000";
-  const url = `${server}/public/update/win`;
   autoUpdater.autoDownload = false;
   autoUpdater.setFeedURL(url);
   autoUpdater.checkForUpdates();
@@ -65,15 +78,14 @@ export function checkForUpdate(win: BrowserWindow | null) {
 
   // 更新下载
   autoUpdater.on("update-downloaded", (res) => {
-    log.info("下载完成");
     console.log(res);
     const dialogOpts: any = {
       type: "info",
       buttons: ["重新启动", "取消"],
-      title: "Application Update",
+      title: "应用程序更新",
       message: "下载完成",
       detail:
-        "A new version has been downloaded. Restart the application to apply the updates.",
+        "新版本已下载。重新启动应用程序以应用更新。",
     };
 
     dialog.showMessageBox(dialogOpts).then((returnValue) => {
@@ -88,25 +100,25 @@ export function checkForUpdate(win: BrowserWindow | null) {
 }
 
 // 创建更新 app-update.yml文件 函数
-// function createUpdateFile() {
-//   let yaml = "";
+function createUpdateFile() {
+  let yaml = "";
 
-//   yaml += "provider: generic\n";
-//   yaml += "url: http://192.168.0.123:3000/public/update/win\n";
-//   yaml += "useMultipleRangeRequest: false\n";
-//   yaml += "channel: latest\n";
-//   yaml += "updaterCacheDirName: " + app.getName();
+  yaml += "provider: generic\n";
+  yaml += "url: http://192.168.0.123:3000/public/update/win\n";
+  yaml += "useMultipleRangeRequest: false\n";
+  yaml += "channel: latest\n";
+  yaml += "updaterCacheDirName: " + app.getName();
 
-//   let update_file = [path.join(process.resourcesPath, "app-update.yml"), yaml];
-//   let dev_update_file = [
-//     path.join(process.resourcesPath, "dev-app-update.yml"),
-//     yaml,
-//   ];
-//   let chechFiles = [update_file, dev_update_file];
+  let update_file = [path.join(process.resourcesPath, "app-update.yml"), yaml];
+  let dev_update_file = [
+    path.join(process.resourcesPath, "dev-app-update.yml"),
+    yaml,
+  ];
+  let chechFiles = [update_file, dev_update_file];
 
-//   for (let file of chechFiles) {
-//     if (!fs.existsSync(file[0])) {
-//       fs.writeFileSync(file[0], file[1]);
-//     }
-//   }
-// }
+  for (let file of chechFiles) {
+    if (!fs.existsSync(file[0])) {
+      fs.writeFileSync(file[0], file[1]);
+    }
+  }
+}

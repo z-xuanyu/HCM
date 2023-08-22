@@ -1,8 +1,16 @@
+<!--
+ * @Author: xuanyu 969718197@qq.com
+ * @Date: 2023-08-18 17:02:03
+ * @LastEditors: xuanyu 969718197@qq.com
+ * @LastEditTime: 2023-08-21 18:08:04
+ * @FilePath: \HCM\src\layouts\components\global-header\components\UserAvatar.vue
+ * @Description: 顶部用户头像
+-->
 <template>
   <n-dropdown :options="options" @select="handleDropdown">
     <hover-container class="px-[12px]" :inverted="theme.header.inverted">
       <icon-svg-avatar class="text-[32px]" />
-      <span class="pl-[8px] text-[16px] font-medium">阿宇</span>
+      <!-- <span class="pl-[8px] text-[16px] font-medium">阿宇</span> -->
     </hover-container>
   </n-dropdown>
 </template>

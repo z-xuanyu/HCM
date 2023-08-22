@@ -7,7 +7,7 @@
   },
   "publish": {
     "provider": "generic",
-    "url": "http://192.168.0.123:3000/"
+    "url": "https://update.zhouxuanyu.com/"
   },
   "files": [
     "dist-electron",

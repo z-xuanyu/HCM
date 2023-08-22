@@ -2,13 +2,18 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-16 17:06:19
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-18 17:15:47
+ * @LastEditTime: 2023-08-22 11:22:59
  * @FilePath: \HCM\src\types\global.d.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export interface IElectronAPI {
   platform: string;
   setTitle: (title: string) => void;
+  handleUpdateTips: (callback: Function) => void;
+  handleUpdateProgress: (callback: Function) => void;
+  handleUpdateConfirm: () => void;
+  handleUpdateComplete: (callback: Function) => void;
+  handleUpdateInstall: () => void;
 }
 
 declare global {

@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-13 15:21:22
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 17:48:20
+ * @LastEditTime: 2023-08-22 11:49:52
  * @FilePath: \HCM\electron\main.ts
  * @Description: 主入口文件
  */
@@ -36,7 +36,10 @@ function createWindow() {
     },
   });
 
-  win.webContents.openDevTools();
+  // 开发环境打开调试工具
+  if (process.env.NODE_ENV === "development") {
+    win.webContents.openDevTools();
+  }
 
   ipcMain.on("set-title", (event, title) => {
     const webContents = event.sender;
@@ -58,6 +61,8 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(process.env.DIST, "index.html"));
   }
+
+   checkForUpdate(win);
 }
 
 app.on("window-all-closed", () => {
@@ -66,6 +71,6 @@ app.on("window-all-closed", () => {
 
 app.whenReady().then(createWindow);
 
-app.on("ready", () => {
-  checkForUpdate(win);
-});
+// app.on("ready", () => {
+//   checkForUpdate(win);
+// });

@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 16:56:15
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-21 16:42:44
+ * @LastEditTime: 2023-08-22 09:55:08
  * @FilePath: \HCM\src\router\index.ts
  * @Description: 路由配置
  */
@@ -13,11 +13,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/layout",
     name: "Layout",
+    redirect: "/dashboard",
     component: () => import("/@/layouts/index.vue"),
     meta: {
       title: "首页",
     },
     children: [
+      {
+        path: "/dashboard",
+        name: "Dashboard",
+        component: () => import("/@/views/dashboard/index.vue"),
+        meta: {
+          title: "工作台",
+        },
+      },
       {
         path: "/browser",
         name: "Browser",

@@ -2,12 +2,12 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 15:07:53
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-22 09:45:08
+ * @LastEditTime: 2023-08-22 14:00:50
  * @FilePath: \HCM\electron\update.ts
  * @Description: 更新版本
  */
 import { autoUpdater } from "electron-updater";
-import { BrowserWindow, dialog, app } from "electron";
+import { BrowserWindow, app, ipcMain } from "electron";
 import log from "electron-log";
 import path from "path";
 import fs from "fs";
@@ -55,51 +55,40 @@ export function checkForUpdate(win: BrowserWindow | null) {
 
   //update-available
   autoUpdater.on("update-available", function () {
-    log.info("有更新");
-    dialog
-      .showMessageBox({
-        type: "info",
-        title: "软件更新",
-        message: "发现新版本, 确定更新?",
-        buttons: ["确定", "取消"],
-      })
-      .then((resp) => {
-        if (resp.response == 0) {
-          autoUpdater.downloadUpdate();
-        }
-      });
+    setTimeout(() => {
+      win!.webContents.send("update-tips", [
+        "1.修复了一些bug, 体验更流畅;",
+        "2.添加导入资料功能;",
+      ]);
+    }, 1000);
   });
-
   // 下载进度条
   autoUpdater.on("download-progress", (progressObj) => {
-    log.info(progressObj, "下载进度");
-    win?.setProgressBar(progressObj.percent / 100);
+    win!.webContents.send("update-progress", progressObj.percent);
+  });
+  // 更新下载完成
+  autoUpdater.on("update-downloaded", () => {
+    win!.webContents.send("update-complete");
   });
 
-  // 更新下载
-  autoUpdater.on("update-downloaded", (res) => {
-    console.log(res);
-    const dialogOpts: any = {
-      type: "info",
-      buttons: ["重新启动", "取消"],
-      title: "应用程序更新",
-      message: "下载完成",
-      detail:
-        "新版本已下载。重新启动应用程序以应用更新。",
-    };
-
-    dialog.showMessageBox(dialogOpts).then((returnValue) => {
-      if (returnValue.response === 0) autoUpdater.quitAndInstall();
-    });
-  });
-
+  // 更新错误
   autoUpdater.on("error", (message) => {
-    console.error("There was a problem updating the application");
     console.error(message);
+  });
+
+  // 确认更新
+  ipcMain.on("update-confirm", () => {
+    autoUpdater.downloadUpdate();
+  });
+
+  // 退出并安装
+  ipcMain.on("update-install", () => {
+    console.log(545454);
+    autoUpdater.quitAndInstall();
   });
 }
 
-// 创建更新 app-update.yml文件 函数
+// 开发环境调试 创建更新 app-update.yml文件 函数
 function createUpdateFile() {
   let yaml = "";
 

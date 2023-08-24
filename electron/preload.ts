@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-13 15:21:22
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-22 10:53:14
+ * @LastEditTime: 2023-08-24 09:10:03
  * @FilePath: \HCM\electron\preload.ts
  * @Description: 渲染进程
  */
@@ -10,8 +10,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("electronAPI", {
-  setTitle: (title: string) => ipcRenderer.send("set-title", title),
-
   // 检查更新
   handleUpdateTips: (callback: any) => ipcRenderer.on("update-tips", callback),
   // 确认更新
@@ -117,4 +115,4 @@ window.onmessage = (ev) => {
   ev.data.payload === "removeLoading" && removeLoading();
 };
 
-setTimeout(removeLoading, 4999);
+setTimeout(removeLoading, 1000);

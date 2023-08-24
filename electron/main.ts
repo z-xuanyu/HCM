@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-13 15:21:22
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-22 11:49:52
+ * @LastEditTime: 2023-08-24 09:13:19
  * @FilePath: \HCM\electron\main.ts
  * @Description: 主入口文件
  */
@@ -25,7 +25,6 @@ process.env.PUBLIC = app.isPackaged
   : path.join(process.env.DIST, "../public");
 
 let win: BrowserWindow | null;
-// 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 
 function createWindow() {
@@ -35,42 +34,25 @@ function createWindow() {
       preload: path.join(__dirname, "preload.js"),
     },
   });
-
-  // 开发环境打开调试工具
-  if (process.env.NODE_ENV === "development") {
-    win.webContents.openDevTools();
-  }
-
-  ipcMain.on("set-title", (event, title) => {
-    const webContents = event.sender;
-    const winDemo = BrowserWindow.fromWebContents(webContents);
-    winDemo!.setTitle(title);
-  });
-
   Menu.setApplicationMenu(null);
-
-  // Test active push message to Renderer-process.
   win.webContents.on("did-finish-load", () => {
     win?.webContents.send("main-process-message", new Date().toLocaleString());
   });
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL);
-    // win.loadURL('http://pcvp.visumall.com/?companyid=0510D02D-3A1F-4796-B303-DAAE36394606');
+    win.webContents.openDevTools();
   } else {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(process.env.DIST, "index.html"));
   }
-
-   checkForUpdate(win);
 }
 
 app.on("window-all-closed", () => {
   win = null;
 });
 
-app.whenReady().then(createWindow);
-
-// app.on("ready", () => {
-//   checkForUpdate(win);
-// });
+app.whenReady().then(()=> {
+  createWindow();
+  checkForUpdate(win);
+});

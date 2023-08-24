@@ -2,7 +2,7 @@
  * @Author: xuanyu 969718197@qq.com
  * @Date: 2023-08-14 15:07:53
  * @LastEditors: xuanyu 969718197@qq.com
- * @LastEditTime: 2023-08-22 14:00:50
+ * @LastEditTime: 2023-08-23 18:03:47
  * @FilePath: \HCM\electron\update.ts
  * @Description: 更新版本
  */
@@ -13,16 +13,16 @@ import path from "path";
 import fs from "fs";
 
 export function checkForUpdate(win: BrowserWindow | null) {
-  if (process.env.NODE_ENV === "development") {
-    // 开发环境调试
-    Object.defineProperty(app, "isPackaged", {
-      get() {
-        return true;
-      },
-    });
-    // 生成更新文件
-    createUpdateFile();
-  }
+  // if (process.env.NODE_ENV === "development") {
+  //   // 开发环境调试
+  //   Object.defineProperty(app, "isPackaged", {
+  //     get() {
+  //       return true;
+  //     },
+  //   });
+  //   // 生成更新文件
+  //   createUpdateFile();
+  // }
   const server = "https://update.zhouxuanyu.com";
   let url: string = "";
 
@@ -89,25 +89,25 @@ export function checkForUpdate(win: BrowserWindow | null) {
 }
 
 // 开发环境调试 创建更新 app-update.yml文件 函数
-function createUpdateFile() {
-  let yaml = "";
+// function createUpdateFile() {
+//   let yaml = "";
 
-  yaml += "provider: generic\n";
-  yaml += "url: http://192.168.0.123:3000/public/update/win\n";
-  yaml += "useMultipleRangeRequest: false\n";
-  yaml += "channel: latest\n";
-  yaml += "updaterCacheDirName: " + app.getName();
+//   yaml += "provider: generic\n";
+//   yaml += "url: http://192.168.0.123:3000/public/update/win\n";
+//   yaml += "useMultipleRangeRequest: false\n";
+//   yaml += "channel: latest\n";
+//   yaml += "updaterCacheDirName: " + app.getName();
 
-  let update_file = [path.join(process.resourcesPath, "app-update.yml"), yaml];
-  let dev_update_file = [
-    path.join(process.resourcesPath, "dev-app-update.yml"),
-    yaml,
-  ];
-  let chechFiles = [update_file, dev_update_file];
+//   let update_file = [path.join(process.resourcesPath, "app-update.yml"), yaml];
+//   let dev_update_file = [
+//     path.join(process.resourcesPath, "dev-app-update.yml"),
+//     yaml,
+//   ];
+//   let chechFiles = [update_file, dev_update_file];
 
-  for (let file of chechFiles) {
-    if (!fs.existsSync(file[0])) {
-      fs.writeFileSync(file[0], file[1]);
-    }
-  }
-}
+//   for (let file of chechFiles) {
+//     if (!fs.existsSync(file[0])) {
+//       fs.writeFileSync(file[0], file[1]);
+//     }
+//   }
+// }
